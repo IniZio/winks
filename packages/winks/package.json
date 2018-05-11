@@ -2,7 +2,11 @@
   "name": "winks",
   "version": "0.0.0",
   "description": "A web-component view library",
-  "main": "index.js",
+  "main": "dist/cjs/winks.cjs.js",
+  "files": [
+    "src",
+    "dist/*.js"
+  ],
   "repository": "https://github.com/winksjs/winks.git",
   "author": "IniZio",
   "license": "MIT"

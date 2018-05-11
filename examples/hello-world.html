@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.2.0/webcomponents-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.2.0/custom-elements-es5-adapter.js"></script>
+  <script src="../packages/winks/dist/winks.min.js"></script>
+  <script>
+    Winks.component('xyz-abc', {
+      template: '<h1>XYZ ABC</h1>'
+    })
+  </script>
+  <abc-xyz></abc-xyz>
+  <xyz-abc></xyz-abc>
+</body>
+</html>
