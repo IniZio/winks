@@ -40,7 +40,7 @@ const formats = {
 
 const entry = ({package}) => resolve.apply(null, ['packages/', package, 'src/index.js'].filter(Boolean))
 
-const dest = ({package, format, optimize = false}) =>
+const dest = ({package, env, format, optimize = false}) =>
   resolve.apply(null, ['packages/', package, 'dist/', [package, formats[format], env === 'production' && 'min', 'js'].filter(Boolean).join('.')].filter(Boolean))
 
 const genBuilds = builds => builds.map(genConfig)
