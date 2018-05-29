@@ -30,6 +30,128 @@
 </html>
 ```
 
+## How to use
+
+#### 1. Add a new component
+
+```js
+Winks.component('some-component', {
+  template: '<h2>Component content</h2>'
+})
+```
+
+### 2. Access children of the html file in its class
+
+```js
+Winks.component('xyz-abc', {
+  connectedCallback () {
+    super.connectedCallback()
+    console.log($(this.shadowRoot).children('#send-email'))
+  }
+}
+```
+
+### 3. Add event listeners to template content
+
+```js
+Winks.component('xyz-abc', class extends MyElement {
+  template: '<button @click="sendEmail">Send</button>'
+  sendEmail (e) {
+    e.preventDefault()
+    api.sendMail()
+    console.log('sending email')
+  }
+})
+```
+
+### 4. Use reactive state
+
+```html
+<template>
+  <input :value="message" @input="changeMessage">
+  <div :children="message"></div>
+</template>
+
+<script>
+  Winks.component('abc-xyz', {
+    // NOTE: Use a function that returns the initial value
+    data () {
+      return {
+        cc: 100,
+        message: 'qq'
+      }
+    }
+    changeMessage (e) {
+      this.data.message = e.target.value
+    }
+  })
+</script>
+```
+
+### 5. Use global context
+
+```html
+<template>
+  <input ~value="magic" @input="changeMessage">
+  <div ~children="magic"></div>
+</template>
+
+<script>
+  Winks.component('abc-xyz', {
+    changeMessage (e) {
+      this.context.magic = e.target.value
+    }
+  })
+</script>
+```
+
+### 6. Use `x-for` directive
+
+```html
+<template>
+  <div x-for="abc:messages" :children="abc"></div>
+</template>
+
+<script>
+  Winks.component('abc-xyz', {
+    data () {
+      return {
+        messages: ['hello', 'bye', 'magic']
+      }
+    }
+  })
+</script>
+```
+
+### 7. Use `x-if` and `x-else` directive
+
+```html
+<template>
+  <button @click="toggleEdit">Edit</button>
+  <input x-if="isEditting" :value="content" @input="changeContent">
+  <div x-else :children="content"></div>
+</template>
+
+<script>
+  Winks.component('abc-xyz', {
+    data () {
+      return {
+        isEditting: false,
+        content: ''
+      }
+    }
+  
+    toggleEdit () {
+      this.data.isEditting = !this.data.isEditting
+    }
+  
+    changeContent (e) {
+      this.data.content = e.target.value
+    }
+  })
+</script>
+```
+
 ## Development
 
 ```sh
