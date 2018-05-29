@@ -1,0 +1,16 @@
+{
+  "name": "parcel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel index.html -p 8080  --open",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "parcel-bundler": "^1.8.1",
+    "winks": "../../packages/winks"
+  },
+  "dependencies": {}
+}
