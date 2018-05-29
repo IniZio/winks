@@ -54,13 +54,17 @@ const genConfig = build => {
     external: build.external,
     plugins: [
       flow(),
-      babel({...build.babel}),
+      babel({
+        exclude: 'node_modules/**',
+        plugins: ['external-helpers'],
+        ...build.babel
+      }),
       minify({comments: build.env !== 'production'}),
       alias({...build.alias}),
       replace({
         'process.env.NODE_ENV': JSON.stringify(build.env)
       }),
-      ...build.plugins
+      ...build.plugins || []
     ].filter(Boolean),
     output: {
       file: dest(build),
@@ -105,7 +109,7 @@ module.exports = clipped => {
         await Promise.all(
           clipped.config.winks.map(
             async config => {
-              const watcher = await watch(config.toJSON())
+              const watcher = watch(config.toJSON())
               watcher.on('event', event => {
                 const handlers = {
                   START () {
@@ -113,6 +117,14 @@ module.exports = clipped => {
                   },
                   END () {
                     clipped.print('Finished bundling')
+                  },
+                  ERROR () {
+                    clipped.print('error')
+                    clipped.print(event)
+                  },
+                  FATAL (e) {
+                    clipped.print('fatality')
+                    clipped.print(event)
                   }
                 }
                 handlers[event.code] && handlers[event.code]()

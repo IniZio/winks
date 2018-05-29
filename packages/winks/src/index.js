@@ -10,12 +10,4 @@ Object.assign(Winks, {
   }
 })
 
-if (process.env.NODE_ENV === 'development') {
-  window.addEventListener('WebComponentsReady', () => {
-    Winks.component('abc-xyz', {
-      template: '<h2>ABC</h2>'
-    })
-  })
-}
-
 export default Winks

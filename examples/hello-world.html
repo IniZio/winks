@@ -12,7 +12,17 @@
   <script src="../packages/winks/dist/winks.min.js"></script>
   <script>
     Winks.component('xyz-abc', {
-      template: '<h1>XYZ ABC</h1>'
+      template: `<div>
+        <h2>ABC</h2>
+        <div :children="message"></div>
+        <input @input="changeMessage">
+      </div>`,
+      data: () => ({
+        message: 'YO MAN'
+      }),
+      changeMessage (e) {
+        this.data.message = e.target.value
+      }
     })
   </script>
   <abc-xyz></abc-xyz>

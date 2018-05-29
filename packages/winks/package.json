@@ -9,5 +9,8 @@
   ],
   "repository": "https://github.com/winksjs/winks.git",
   "author": "IniZio",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "observable-slim": "^0.0.5"
+  }
 }
