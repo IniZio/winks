@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/winksjs/winks/compare/v0.2.0...v0.3.0) (2018-05-29)
+
+
+### Features
+
+* **template:** adds support for template tag ([cfcd8e6](https://github.com/winksjs/winks/commit/cfcd8e6))
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/winksjs/winks/compare/v0.1.0...v0.2.0) (2018-05-29)
 
