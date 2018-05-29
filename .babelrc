@@ -1,7 +1,0 @@
-{
-  "presets": ["diffhtml-imports"],
-  "plugins": [
-    "transform-class-properties",
-    "transform-custom-element-classes"
-  ]
-}

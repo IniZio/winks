@@ -2,7 +2,7 @@
   "name": "winks",
   "version": "0.1.0",
   "description": "A web-component view library",
-  "main": "dist/cjs/winks.cjs.js",
+  "main": "dist/winks.common.min.js",
   "files": [
     "src",
     "dist/*.js"

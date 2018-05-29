@@ -9,24 +9,28 @@ const alias = require('rollup-plugin-alias')
 const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
 
+const {genBabel} = require('./scripts/babel')
+
 const {resolve} = path
 
 const {NODE_ENV} = process.env
 
 const packages = {
-  'winks': ['browser-runtime-dev', 'browser-runtime-prod']
+  'winks': ['browser-runtime-dev', 'browser-runtime-prod', 'browser-runtime-cjs']
 }
 
 const flavours = {
   'browser-runtime-dev': {
     env: 'development',
-    format: 'umd',
-    plugins: [nodeResolve({main: true, jsnext: true}), commonjs({include: 'node_modules/**'})]
+    format: 'umd'
   },
   'browser-runtime-prod': {
     env: 'production',
-    format: 'umd',
-    plugins: [nodeResolve({main: true, jsnext: true}), commonjs({include: 'node_modules/**'})]
+    format: 'umd'
+  },
+  'browser-runtime-cjs': {
+    env: 'production',
+    format: 'cjs'
   }
 }
 
@@ -40,15 +44,12 @@ const formats = {
 
 const entry = ({package}) => resolve.apply(null, ['packages/', package, 'src/index.js'].filter(Boolean))
 
-const dest = ({package, env, format, optimize = false}) =>
+const dest = ({package, env, format}) =>
   resolve.apply(null, ['packages/', package, 'dist/', [package, formats[format], env === 'production' && 'min', 'js'].filter(Boolean).join('.')].filter(Boolean))
 
 const genBuilds = builds => builds.map(genConfig)
 
 const genConfig = build => {
-  // NOTE: diffhtml presets uses NODE_ENV for format detection
-  process.env.NODE_ENV = build.format
-
   const config = {
     input: entry(build),
     external: build.external,
@@ -56,7 +57,7 @@ const genConfig = build => {
       flow(),
       babel({
         exclude: 'node_modules/**',
-        plugins: ['external-helpers'],
+        ...genBabel(build),
         ...build.babel
       }),
       minify({comments: build.env !== 'production'}),
@@ -64,6 +65,8 @@ const genConfig = build => {
       replace({
         'process.env.NODE_ENV': JSON.stringify(build.env)
       }),
+      nodeResolve({main: true, jsnext: true}),
+      commonjs({include: 'node_modules/**'}),
       ...build.plugins || []
     ].filter(Boolean),
     output: {
