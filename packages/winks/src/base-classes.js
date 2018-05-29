@@ -41,8 +41,13 @@ class WebComponent extends HTMLElementCtor {
   }
 
   connectedCallback () {
-    const element = document.createElement('div')
-    element.innerHTML = this.template
+    let element = null
+    if (this.template.content) {
+      element = this.template
+    } else {
+      element = document.createElement('div')
+      element.innerHTML = this.template
+    }
 
     if (!this.nonShadow) {
       if (!this.shadowRoot) {
