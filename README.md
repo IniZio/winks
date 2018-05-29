@@ -1,5 +1,7 @@
-<p align="center">:stuck_out_tongue_winking_eye:</p>
 <h1 align="center">Winks.js</h1>
+
+<p align="center">:stuck_out_tongue_winking_eye: A library made when doing assignment https://github.com/IniZio/COMP4021-SPA :stuck_out_tongue_winking_eye:</p>
+<p align="center">Uses web-component, custom-element and html-import</p>
 
 ## Getting started
 
