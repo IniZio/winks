@@ -1,4 +1,5 @@
-# :stuck_out_tongue_winking_eye: Winks.js
+<p align="center">:stuck_out_tongue_winking_eye:</p>
+<h1 align="center">Winks.js</h1>
 
 ## Getting started
 
